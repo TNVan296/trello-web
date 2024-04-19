@@ -5,11 +5,31 @@ import ThreeDRotation from '@mui/icons-material/ThreeDRotation'
 import HomeIcon from '@mui/icons-material/Home'
 import { pink } from '@mui/material/colors'
 import Typography from '@mui/material/Typography'
+import { useColorScheme } from '@mui/material/styles'
+
+// CSR
+function ModToggle() {
+  const { mode, setMode } = useColorScheme()
+  return (
+    <Button
+      onClick={ () => {
+        setMode( mode === 'light' ? 'dark' : 'light')
+        // localStorage.setItem('trello-web-dark-light-mode')
+        // localStorage.getItem('trello-web-dark-light-mode')
+      }}
+    >
+      {mode === 'light' ? 'Turn Dark' : 'Turn Light'}
+    </Button>
+  )
+}
 
 function App() {
 
   return (
     <>
+      <ModToggle />
+      <hr />
+
       <Typography variant='body2' color='text.secondary'>This is a test of Typography</Typography>
       <Button variant="contained">Hello world</Button>
 
