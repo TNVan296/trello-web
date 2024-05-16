@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "paths": {
+      // xử lý khâu import sẽ thay bằng ~/ thay vì ../../
+      // cái này xử lý trên vs code để giúp vs code ctrl+click vào sẽ vào đúng đường dẫn ta click
+      "~/*": ["./src/*"],
+    },
+  }
+}
