@@ -1,17 +1,17 @@
 import { experimental_extendTheme as extendTheme } from '@mui/material/styles'
-import { cyan, deepOrange, teal, orange } from '@mui/material/colors'
+import { grey, deepOrange, blueGrey, orange } from '@mui/material/colors'
 
 // Create a theme instance.
 const theme = extendTheme({
   trello: {
-    appBarHeight: '50px',
-    boardBarHeight: '60px'
+    appBarHeight: '60px',
+    boardBarHeight: '65px'
   },
 
   colorSchemes: {
     light: {
       palette: {
-        primary: teal,
+        primary: blueGrey,
         secondary: deepOrange
       }
       // nếu khách hàng mỗi thay đổi 1 số điều kiện, ta chỉ cần custom ngay vào đây
@@ -19,7 +19,7 @@ const theme = extendTheme({
     },
     dark: {
       palette: {
-        primary: cyan,
+        primary: grey,
         secondary: orange
       }
     }
