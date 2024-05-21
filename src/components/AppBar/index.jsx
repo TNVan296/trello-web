@@ -19,7 +19,6 @@ import HelpOutlineIcon from '@mui/icons-material/HelpOutline'
 function AppBar() {
   return (
     <Box px={1.5} sx={{
-      backgroundColor: 'primary.main',
       width: '100%',
       height: (theme) => theme.trello.appBarHeight,
       display: 'flex',
@@ -27,10 +26,10 @@ function AppBar() {
       justifyContent: 'space-between'
     }}>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-        <AppsIcon sx={{ color: 'primary.50' }} />
+        <AppsIcon sx={{ color: 'primary.main' }} />
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-          <SvgIcon component={TrelloIcon} inheritViewBox sx={{ color: 'primary.50' }} />
-          <Typography variant='span' sx={{ fontSize: '1.3rem', fontWeight: 'bold', color: 'primary.50' }}>Trello</Typography>
+          <SvgIcon component={TrelloIcon} inheritViewBox sx={{ color: 'primary.main' }} />
+          <Typography variant='span' sx={{ fontSize: '1.3rem', fontWeight: 'bold', color: 'primary.main' }}>Trello</Typography>
         </Box>
 
         <Workspaces />
@@ -38,21 +37,21 @@ function AppBar() {
         <Starred />
         <Templates />
 
-        <Button variant='outlined' sx={{ fontWeight: 'bold', color: 'primary.50', backgroundColor: 'primary.A400' }}>Create</Button>
+        <Button variant='outlined' sx={{ fontWeight: 'bold', backgroundColor: 'primary.main', color: 'primary.50' }}>Create</Button>
       </Box>
 
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
         <ModeSelect />
-        <TextField id="outlined-search" label="Search" type="search" size='small' sx={{ backgroundColor: 'primary.A400' }}/>
+        <TextField id="outlined-search" label="Search" type="search" size='small'/>
 
         <Tooltip title='Notification'>
-          <Badge color="secondary" variant="dot" sx={{ cursor: 'pointer' }}>
+          <Badge color="secondary" variant="dot" sx={{ cursor: 'pointer', color: 'primary.main' }}>
             <NotificationsNoneIcon />
           </Badge>
         </Tooltip>
 
         <Tooltip title='Help'>
-          <HelpOutlineIcon sx={{ cursor: 'pointer' }}/>
+          <HelpOutlineIcon sx={{ cursor: 'pointer', color: 'primary.main' }}/>
         </Tooltip>
 
         <Profiles />

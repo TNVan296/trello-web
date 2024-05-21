@@ -24,8 +24,6 @@ function Starred() {
           aria-controls={open ? 'basic-menu-starred' : undefined}
           aria-haspopup="true"
           aria-expanded={open ? 'true' : undefined}
-          variant="contained"
-          disableElevation
           onClick={handleClick}
           endIcon={<KeyboardArrowDownIcon />}
         >
