@@ -24,8 +24,6 @@ function Templates() {
           aria-controls={open ? 'basic-menu-templates' : undefined}
           aria-haspopup="true"
           aria-expanded={open ? 'true' : undefined}
-          variant="contained"
-          disableElevation
           onClick={handleClick}
           endIcon={<KeyboardArrowDownIcon />}
         >

@@ -26,8 +26,6 @@ function Workspaces() {
         aria-controls={open ? 'basic-menu-workspaces' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
-        variant="contained"
-        disableElevation
         onClick={handleClick}
         endIcon={<KeyboardArrowDownIcon />}
       >
