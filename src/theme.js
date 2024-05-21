@@ -25,6 +25,28 @@ const theme = extendTheme({
     }
   },
   components: {
+    // update scroll bar trong MuiCssBaseline
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          // apply cho toàn bộ scroll bar trong trang web
+          '*::-webkit-scrollbar': {
+            width: '8px',
+            height: '8px'
+          },
+          // apply màu của scroll bar
+          '*::-webkit-scrollbar-thumb': {
+            backgroundColor: '#bdc3c7',
+            borderRadius: '8px'
+          },
+          // apply màu của scroll bar khi hover
+          '*::-webkit-scrollbar-thumb:hover': {
+            backgroundColor: '#3498db',
+            borderRadius: '8px'
+          }
+        }
+      }
+    },
     MuiButton: {
       styleOverrides: {
         root: ({ theme }) => ({

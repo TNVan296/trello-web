@@ -32,8 +32,6 @@ function Profiles() {
           aria-controls={open ? 'basic-menu-profiles' : undefined}
           aria-haspopup="true"
           aria-expanded={open ? 'true' : undefined}
-          variant="contained"
-          disableElevation
         >
           <Avatar sx={{ width: 32, height: 32 }}>TNV</Avatar>
         </IconButton>
