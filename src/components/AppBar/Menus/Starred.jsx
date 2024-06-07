@@ -26,6 +26,13 @@ function Starred() {
           aria-expanded={open ? 'true' : undefined}
           onClick={handleClick}
           endIcon={<KeyboardArrowDownIcon />}
+          sx={{
+            color: 'secondary.900',
+            '&:hover': {
+              bgcolor: 'secondary.A400',
+              color: 'secondary.900'
+            }
+          }}
         >
           Starred
         </Button>

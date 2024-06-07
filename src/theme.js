@@ -1,5 +1,5 @@
 import { experimental_extendTheme as extendTheme } from '@mui/material/styles'
-import { deepOrange, blueGrey, orange, lightBlue } from '@mui/material/colors'
+import { blueGrey, grey } from '@mui/material/colors'
 
 // Create a theme instance.
 const theme = extendTheme({
@@ -11,8 +11,8 @@ const theme = extendTheme({
   colorSchemes: {
     light: {
       palette: {
-        primary: lightBlue,
-        secondary: deepOrange
+        primary: grey,
+        secondary: grey
       }
       // nếu khách hàng mỗi thay đổi 1 số điều kiện, ta chỉ cần custom ngay vào đây
       // spacing: (factor) => `${0.25 * factor}rem`
@@ -20,7 +20,7 @@ const theme = extendTheme({
     dark: {
       palette: {
         primary: blueGrey,
-        secondary: orange
+        secondary: grey
       }
     }
   },

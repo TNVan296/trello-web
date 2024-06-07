@@ -11,7 +11,6 @@ import Templates from './Menus/Templates'
 import Profiles from './Menus/Profiles'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
-import Badge from '@mui/material/Badge'
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone'
 import Tooltip from '@mui/material/Tooltip'
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline'
@@ -19,6 +18,7 @@ import HelpOutlineIcon from '@mui/icons-material/HelpOutline'
 function AppBar() {
   return (
     <Box px={1.5} sx={{
+      backgroundColor: 'primary.light',
       width: '100%',
       height: (theme) => theme.trello.appBarHeight,
       display: 'flex',
@@ -28,10 +28,19 @@ function AppBar() {
       overflowX: 'auto'
     }}>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-        <AppsIcon sx={{ color: 'primary.main' }} />
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-          <SvgIcon component={TrelloIcon} inheritViewBox sx={{ color: 'primary.main' }} />
-          <Typography variant='span' sx={{ fontSize: '1.3rem', fontWeight: 'bold', color: 'primary.main' }}>Trello</Typography>
+        <AppsIcon sx={{ color: 'secondary.900' }} />
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 0.5,
+            '&:hover': {
+              bgcolor: 'secondary.A400',
+              borderRadius: 1.5
+            }
+          }}>
+          <SvgIcon component={TrelloIcon} inheritViewBox sx={{ color: 'secondary.900' }} />
+          <Typography variant='span' sx={{ fontSize: '1.3rem', fontWeight: 'bold', color: 'secondary.900' }}>Trello</Typography>
         </Box>
 
         <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 1 }}>
@@ -40,22 +49,70 @@ function AppBar() {
           <Starred />
           <Templates />
 
-          <Button variant='outlined' sx={{ fontWeight: 'bold', backgroundColor: 'primary.main', color: 'primary.50' }}>Create</Button>
+          <Button variant='outlined'
+            sx={{
+              fontWeight: 'bold',
+              bgcolor: 'secondary.A400',
+              color: 'secondary.900',
+              '&:hover': {
+                bgcolor: 'secondary.A400',
+                color: 'secondary.900'
+              } }}>
+                Create
+          </Button>
         </Box>
       </Box>
 
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
         <ModeSelect />
-        <TextField id="outlined-search" label="Search" type="search" size='small' sx={{ minWidth: '120px' }}/>
+        <TextField
+          id="outlined-search"
+          label="Search"
+          type="search"
+          size='small'
+          sx={{
+            minWidth: '120px',
+            borderRadius: 1.5
+          }}/>
 
         <Tooltip title='Notifications'>
-          <Badge color="secondary" variant="dot" sx={{ cursor: 'pointer', color: 'primary.main' }}>
-            <NotificationsNoneIcon />
-          </Badge>
+          <Button
+            sx={{
+              color: 'secondary.900',
+              '&:hover': {
+                bgcolor: 'secondary.A400'
+              }
+            }}>
+            <NotificationsNoneIcon
+              sx={{
+                cursor: 'pointer',
+                color: 'secondary.900',
+                '&:hover': {
+                  bgcolor: 'secondary.A400',
+                  borderRadius: 1.5
+                }
+              }}/>
+          </Button>
         </Tooltip>
 
         <Tooltip title='Help'>
-          <HelpOutlineIcon sx={{ cursor: 'pointer', color: 'primary.main' }}/>
+          <Button
+            sx={{
+              color: 'secondary.900',
+              '&:hover': {
+                bgcolor: 'secondary.A400'
+              }
+            }}>
+            <HelpOutlineIcon
+              sx={{
+                cursor: 'pointer',
+                color: 'secondary.900',
+                '&:hover': {
+                  bgcolor: 'secondary.A400',
+                  borderRadius: 1.5
+                }
+              }}/>
+          </Button>
         </Tooltip>
 
         <Profiles />
