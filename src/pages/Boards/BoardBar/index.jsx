@@ -14,7 +14,7 @@ import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined'
 function BoardBar() {
   return (
     <Box px={1.5} sx={{
-      backgroundColor: 'primary.light',
+      bgcolor: '#d2dae2',
       width: '100%',
       height: (theme) => theme.trello.boardBarHeight,
       display: 'flex',
@@ -22,18 +22,20 @@ function BoardBar() {
       justifyContent: 'space-between',
       gap: 1.5,
       overflowX: 'auto',
-      borderTop: '1px solid #00bfa5'
+      borderTop: '2px solid #7f8c8d'
     }}>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
         <Chip
           sx={{
-            bgcolor: 'primary.light',
-            color: 'secondary.900',
+            bgcolor: '#d2dae2',
+            color: '#34495e',
+            fontSize: '1rem',
+            fontWeight: 'bold',
             border: 'none',
             borderRadius: 4,
             padding: '5px',
             '&:hover': {
-              bgcolor: 'secondary.A400'
+              bgcolor: '#808e9b'
             }
           }}
           label='ThuongNVa Board'
@@ -41,59 +43,40 @@ function BoardBar() {
         <Tooltip title='Click to star or unstar this board'>
           <Button
             sx={{
-              color: 'secondary.900',
+              color: '#485460',
               '&:hover': {
-                bgcolor: 'secondary.A400',
-                color: 'secondary.900'
+                bgcolor: '#808e9b',
+                color: '#485460',
+                borderRadius: 1
               }
             }}>
-            <StarOutlineRoundedIcon
-              sx={{
-                color: 'secondary.900',
-                '&:hover': {
-                  bgcolor: 'secondary.A400',
-                  borderRadius: 1.5
-                }
-              }}/>
+            <StarOutlineRoundedIcon />
           </Button>
         </Tooltip>
         <Tooltip title='Change visibility'>
           <Button
             sx={{
-              color: 'secondary.900',
+              color: '#485460',
               '&:hover': {
-                bgcolor: 'secondary.A400',
-                color: 'secondary.900'
+                bgcolor: '#808e9b',
+                color: '#485460',
+                borderRadius: 1
               }
             }}>
-            <GroupIcon
-              sx={{
-                color: 'secondary.900',
-                '&:hover': {
-                  bgcolor: 'secondary.A400',
-                  borderRadius: 1.5
-                }
-              }}/>
+            <GroupIcon />
           </Button>
         </Tooltip>
         <Tooltip title='Board'>
           <Button
             sx={{
-              color: 'secondary.100',
-              bgcolor: 'secondary.500',
+              color: '#485460',
               '&:hover': {
-                bgcolor: 'secondary.600',
-                color: 'secondary.100'
+                bgcolor: '#808e9b',
+                color: '#485460',
+                borderRadius: 1
               }
             }}>
-            <LeaderBoardIcon
-              sx={{
-                color: 'secondary.100',
-                fontSize: 'medium',
-                '&:hover': {
-                  bgcolor: 'secondary.600'
-                }
-              }}/> Board
+            <LeaderBoardIcon /> Board
           </Button>
         </Tooltip>
       </Box>
@@ -107,27 +90,27 @@ function BoardBar() {
           <Tooltip title='Automation'>
             <Button
               sx={{
-                color: 'secondary.900',
+                color: '#485460',
                 '&:hover': {
-                  bgcolor: 'secondary.A400',
-                  borderRadius: 1.5,
-                  color: 'secondary.900'
+                  bgcolor: '#808e9b',
+                  color: '#485460',
+                  borderRadius: 1
                 }
               }}>
-              <BoltIcon />
+              <BoltIcon fontSize='small' />
             </Button>
           </Tooltip>
           <Tooltip title='Filter cards'>
             <Button
               sx={{
-                color: 'secondary.900',
+                color: '#485460',
                 '&:hover': {
-                  bgcolor: 'secondary.A400',
-                  borderRadius: 1.5,
-                  color: 'secondary.900'
+                  bgcolor: '#808e9b',
+                  color: '#485460',
+                  borderRadius: 1
                 }
               }}>
-              <FilterListIcon /> Filters
+              <FilterListIcon fontSize='small' /> Filters
             </Button>
           </Tooltip>
         </Box>
@@ -158,21 +141,15 @@ function BoardBar() {
           <Tooltip title='Share'>
             <Button
               sx={{
-                color: 'secondary.100',
-                bgcolor: 'secondary.500',
+                color: '#485460',
+                bgcolor: '#808e9b',
                 '&:hover': {
-                  bgcolor: 'secondary.600',
-                  color: 'secondary.100'
+                  bgcolor: '#808e9b',
+                  color: '#485460',
+                  borderRadius: 1
                 }
               }}>
-              <PersonAddAltOutlinedIcon
-                sx={{
-                  color: 'secondary.100',
-                  fontSize: 'medium',
-                  '&:hover': {
-                    bgcolor: 'secondary.600'
-                  }
-                }}/> Share
+              <PersonAddAltOutlinedIcon /> Share
             </Button>
           </Tooltip>
         </Box>

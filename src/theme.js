@@ -1,5 +1,5 @@
 import { experimental_extendTheme as extendTheme } from '@mui/material/styles'
-import { blueGrey, grey } from '@mui/material/colors'
+// import { blueGrey, grey } from '@mui/material/colors'
 
 // Create a theme instance.
 const theme = extendTheme({
@@ -9,20 +9,19 @@ const theme = extendTheme({
   },
 
   colorSchemes: {
-    light: {
-      palette: {
-        primary: grey,
-        secondary: grey
-      }
-      // nếu khách hàng mỗi thay đổi 1 số điều kiện, ta chỉ cần custom ngay vào đây
-      // spacing: (factor) => `${0.25 * factor}rem`
-    },
-    dark: {
-      palette: {
-        primary: blueGrey,
-        secondary: grey
-      }
-    }
+    // light: {
+    //   palette: {
+    //     primary: blueGrey
+    //   }
+    //   // nếu khách hàng mỗi thay đổi 1 số điều kiện, ta chỉ cần custom ngay vào đây
+    //   // spacing: (factor) => `${0.25 * factor}rem`
+    // },
+    // dark: {
+    //   palette: {
+    //     primary: blueGrey,
+    //     secondary: grey
+    //   }
+    // }
   },
   components: {
     // update scroll bar trong MuiCssBaseline
@@ -60,23 +59,24 @@ const theme = extendTheme({
     },
     MuiInputLabel: {
       styleOverrides: {
-        root: ({ theme }) => ({
-          color: theme.palette.primary.main,
+        root: () => ({
+          // color: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#485460'),
+          fontWeight: 'bold',
           fontSize: '0.875rem'
         })
       }
     },
     MuiOutlinedInput: {
       styleOverrides: {
-        root: ({ theme }) => ({
-          color: theme.palette.primary.main,
+        root: () => ({
+          // color: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#485460'),
           fontSize: '0.875rem',
           '.MuiOutlinedInput-notchedOutline': {
-            borderColor: theme.palette.primary.light
+            borderColor: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#485460')
           },
           '&:hover': {
             '.MuiOutlinedInput-notchedOutline': {
-              borderColor: theme.palette.primary.light
+              borderColor: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#485460')
             }
           },
           '& fieldset': {

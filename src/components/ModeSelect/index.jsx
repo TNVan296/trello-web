@@ -18,14 +18,36 @@ function ModeSelect() {
 
   return (
     <FormControl size="small" sx={{ minWidth: '120px' }}>
-      <InputLabel id="label-select-dark-light-mode" sx={{ fontWeight: 'bold', color: 'secondary.900' }}>Mode</InputLabel>
+      <InputLabel id="label-select-dark-light-mode"
+        sx={{
+          color: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#485460'),
+          '&.Mui-focused': {
+            color: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#485460')
+          }
+        }}>
+          Mode
+      </InputLabel>
       <Select
         labelId="label-select-dark-light-mode"
         id="select-dark-light-mode"
         value={mode}
         label="Mode"
         onChange={handleChange}
-        sx={{ fontWeight: 'bold' }}
+        sx={{
+          '.MuiOutlinedInput-notchedOutline': {
+            borderColor: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#485460')
+          },
+          '&:hover': {
+            '.MuiOutlinedInput-notchedOutline': {
+              borderColor: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#485460')
+            }
+          },
+          '&.Mui-focused': {
+            '.MuiOutlinedInput-notchedOutline': {
+              borderColor: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#485460')
+            }
+          }
+        }}
       >
         <MenuItem value='light'>
           <Box sx={{ display: 'flex', fontWeight: 'bold', alignItems: 'center', gap: 1, color: 'secondary.900' }}>

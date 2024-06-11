@@ -26,10 +26,11 @@ function Recent() {
         onClick={handleClick}
         endIcon={<KeyboardArrowDownIcon />}
         sx={{
-          color: 'secondary.900',
+          color: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#485460'),
           '&:hover': {
-            bgcolor: 'secondary.A400',
-            color: 'secondary.900'
+            bgcolor: '#808e9b',
+            color: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#485460'),
+            borderRadius: 1.5
           }
         }}
       >
