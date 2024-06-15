@@ -9,19 +9,11 @@ const theme = extendTheme({
   },
 
   colorSchemes: {
-    // light: {
-    //   palette: {
-    //     primary: blueGrey
-    //   }
-    //   // nếu khách hàng mỗi thay đổi 1 số điều kiện, ta chỉ cần custom ngay vào đây
-    //   // spacing: (factor) => `${0.25 * factor}rem`
-    // },
-    // dark: {
-    //   palette: {
-    //     primary: blueGrey,
-    //     secondary: grey
-    //   }
-    // }
+    light: {
+      // nếu khách hàng mỗi thay đổi 1 số điều kiện, ta chỉ cần custom ngay vào đây
+      // spacing: (factor) => `${0.25 * factor}rem`
+    },
+    dark: { }
   },
   components: {
     // update scroll bar trong MuiCssBaseline
@@ -40,7 +32,7 @@ const theme = extendTheme({
           },
           // apply màu của scroll bar khi hover
           '*::-webkit-scrollbar-thumb:hover': {
-            backgroundColor: '#3498db',
+            backgroundColor: '#636e72',
             borderRadius: '8px'
           }
         }

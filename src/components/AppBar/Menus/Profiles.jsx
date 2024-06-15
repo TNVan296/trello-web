@@ -33,7 +33,13 @@ function Profiles() {
           aria-haspopup="true"
           aria-expanded={open ? 'true' : undefined}
         >
-          <Avatar sx={{ width: 32, height: 32 }}>TNV</Avatar>
+          <Avatar
+            src= ''
+            sx={{
+              width: 32,
+              height: 32
+            }}
+          />
         </IconButton>
       </Tooltip>
       <Menu

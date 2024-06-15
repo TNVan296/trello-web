@@ -37,15 +37,11 @@ function ModeSelect() {
           '.MuiOutlinedInput-notchedOutline': {
             borderColor: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#485460')
           },
-          '&:hover': {
-            '.MuiOutlinedInput-notchedOutline': {
-              borderColor: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#485460')
-            }
+          '&:hover .MuiOutlinedInput-notchedOutline': {
+            borderColor: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#485460')
           },
-          '&.Mui-focused': {
-            '.MuiOutlinedInput-notchedOutline': {
-              borderColor: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#485460')
-            }
+          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            borderColor: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#485460')
           }
         }}
       >

@@ -27,7 +27,7 @@ function BoardBar() {
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
         <Chip
           sx={{
-            bgcolor: '#d2dae2',
+            bgcolor: 'transparent',
             color: '#34495e',
             fontSize: '1rem',
             fontWeight: 'bold',
@@ -69,10 +69,11 @@ function BoardBar() {
         <Tooltip title='Board'>
           <Button
             sx={{
-              color: '#485460',
+              color: '#d2dae2',
+              bgcolor: '#808e9b',
               '&:hover': {
                 bgcolor: '#808e9b',
-                color: '#485460',
+                color: '#d2dae2',
                 borderRadius: 1
               }
             }}>
@@ -131,7 +132,7 @@ function BoardBar() {
               }
             }}>
             <AvatarGroup max={3} total={5}>
-              <Avatar alt="ThuongNVa" src="/static/images/avatar/1.jpg" />
+              <Avatar alt="ThuongNVa" src="~/assets/personal_picture.jpg" />
               <Avatar alt="Firefly" src="/static/images/avatar/2.jpg" />
               <Avatar alt="SAM" src="/static/images/avatar/3.jpg" />
               <Avatar alt="Robin" src="/static/images/avatar/4.jpg" />
@@ -141,11 +142,11 @@ function BoardBar() {
           <Tooltip title='Share'>
             <Button
               sx={{
-                color: '#485460',
+                color: '#d2dae2',
                 bgcolor: '#808e9b',
                 '&:hover': {
                   bgcolor: '#808e9b',
-                  color: '#485460',
+                  color: '#d2dae2',
                   borderRadius: 1
                 }
               }}>
