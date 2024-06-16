@@ -121,24 +121,39 @@ function BoardBar() {
             display: 'flex',
             alignItems: 'center',
             gap: 1.5
-          }}>
-          <Tooltip
-            title='Group Members'
+          }}
+        >
+          <AvatarGroup
+            max={3}
+            total={5}
             sx={{
               '& .MuiAvatar-root': {
                 width: 30,
                 height: 30,
-                fontSize: 16
+                fontSize: 16,
+                border: 'none',
+                color: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#485460'),
+                cursor: 'pointer',
+                '&:first-of-type': { bgcolor: 'a4b0de' }
               }
-            }}>
-            <AvatarGroup max={3} total={5}>
+            }}
+          >
+            <Tooltip title="ThuongNVa">
               <Avatar alt="ThuongNVa" src="~/assets/personal_picture.jpg" />
+            </Tooltip>
+            <Tooltip title="Firefly">
               <Avatar alt="Firefly" src="/static/images/avatar/2.jpg" />
+            </Tooltip>
+            <Tooltip title="SAM">
               <Avatar alt="SAM" src="/static/images/avatar/3.jpg" />
+            </Tooltip>
+            <Tooltip title="Robin">
               <Avatar alt="Robin" src="/static/images/avatar/4.jpg" />
+            </Tooltip>
+            <Tooltip title="Sunday">
               <Avatar alt="Sunday" src="/static/images/avatar/5.jpg" />
-            </AvatarGroup>
-          </Tooltip>
+            </Tooltip>
+          </AvatarGroup>
           <Tooltip title='Share'>
             <Button
               sx={{
