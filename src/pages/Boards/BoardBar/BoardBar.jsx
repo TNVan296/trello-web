@@ -1,6 +1,9 @@
+import React from 'react'
 import Box from '@mui/material/Box'
 import Chip from '@mui/material/Chip'
 import Button from '@mui/material/Button'
+import Menu from '@mui/material/Menu'
+import MenuItem from '@mui/material/MenuItem'
 import Tooltip from '@mui/material/Tooltip'
 import StarOutlineRoundedIcon from '@mui/icons-material/StarOutlineRounded'
 import GroupIcon from '@mui/icons-material/Group'
@@ -11,7 +14,19 @@ import Avatar from '@mui/material/Avatar'
 import AvatarGroup from '@mui/material/AvatarGroup'
 import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined'
 
-function BoardBar() {
+function BoardBar(props) {
+  const { board } = props
+  // const board = props.board
+
+  const [anchorEl, setAnchorEl] = React.useState(null)
+  const open = Boolean(anchorEl)
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget)
+  }
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+
   return (
     <Box px={1.5} sx={{
       bgcolor: '#d2dae2',
@@ -24,7 +39,7 @@ function BoardBar() {
       overflowX: 'auto',
       borderTop: '2px solid #7f8c8d'
     }}>
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
         <Chip
           sx={{
             bgcolor: 'transparent',
@@ -38,7 +53,7 @@ function BoardBar() {
               bgcolor: '#808e9b'
             }
           }}
-          label='ThuongNVa Board'
+          label={board?.title}
           clickable />
         <Tooltip title='Click to star or unstar this board'>
           <Button
@@ -53,18 +68,35 @@ function BoardBar() {
             <StarOutlineRoundedIcon />
           </Button>
         </Tooltip>
-        <Tooltip title='Change visibility'>
-          <Button
+        <Tooltip title='Change visibility' disableHoverListener='true'>
+          <Chip
+            onClick={handleClick}
+            icon={<GroupIcon />}
+            label={board?.type}
             sx={{
+              bgcolor: 'transparent',
               color: '#485460',
+              fontWeight: 'bold',
+              borderRadius: 1,
               '&:hover': {
                 bgcolor: '#808e9b',
-                color: '#485460',
-                borderRadius: 1
+                color: '#485460'
               }
+            }}
+          />
+          <Menu
+            id="menu-droplist"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            MenuListProps={{
+              'aria-labelledby': 'button-menu-droplist'
             }}>
-            <GroupIcon />
-          </Button>
+            <MenuItem onClick={handleClose}>Private</MenuItem>
+            <MenuItem onClick={handleClose}>Workspace</MenuItem>
+            <MenuItem onClick={handleClose}>Organization</MenuItem>
+            <MenuItem onClick={handleClose}>Public</MenuItem>
+          </Menu>
         </Tooltip>
         <Tooltip title='Board'>
           <Button
