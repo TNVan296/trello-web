@@ -13,9 +13,10 @@ import BoltIcon from '@mui/icons-material/Bolt'
 import Avatar from '@mui/material/Avatar'
 import AvatarGroup from '@mui/material/AvatarGroup'
 import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined'
+import { capitalizeFirstLetter } from '~/utils/formatters'
 
-function BoardBar(props) {
-  const { board } = props
+function BoardBar({ board }) {
+  // const { board } = props
   // const board = props.board
 
   const [anchorEl, setAnchorEl] = React.useState(null)
@@ -72,7 +73,7 @@ function BoardBar(props) {
           <Chip
             onClick={handleClick}
             icon={<GroupIcon />}
-            label={board?.type}
+            label={capitalizeFirstLetter(board?.type)}
             sx={{
               bgcolor: 'transparent',
               color: '#485460',

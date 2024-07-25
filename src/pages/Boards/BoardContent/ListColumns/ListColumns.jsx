@@ -3,7 +3,7 @@ import Button from '@mui/material/Button'
 import Column from './Column/Column'
 import AddIcon from '@mui/icons-material/Add'
 
-function ListColumns() {
+function ListColumns({ columns }) {
 
   return (
     <Box sx={{
@@ -13,13 +13,16 @@ function ListColumns() {
       overflowX: 'auto',
       overflowY: 'hidden'
     }}>
-      <Column />
-      <Column />
+      {/* map dữ liệu trong columns, với mỗi column sẽ trả về 1 component
+       Column chứa props gồm key là _id (trong mock-data) và column chứa column (trong mock-data)  */}
+      {columns?.map(column => <Column key={column._id} column={column} />)}
+
+      {/* Button Add new Column */}
       <Box sx={{
         minWidth: '300px',
         maxWidth: '300px',
         mx: 2,
-        bgcolor: '#ffffff3d',
+        bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#485460' : '#dfe6e9'),
         borderRadius: '12px',
         height: 'fit-content'
       }}>
@@ -33,7 +36,7 @@ function ListColumns() {
             borderRadius: '12px',
             color: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#485460'),
             '&:hover': {
-              bgcolor: '#091E4224',
+              bgcolor: '#808e9b',
               color: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#485460'),
               borderRadius: '12px'
             }

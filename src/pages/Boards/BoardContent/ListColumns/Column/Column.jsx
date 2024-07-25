@@ -17,8 +17,10 @@ import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined'
 import AddIcon from '@mui/icons-material/Add'
 import PermMediaIcon from '@mui/icons-material/PermMedia'
 import ListCards from './ListCards/ListCards'
+import { mapOrder } from '~/utils/sorts'
 
-function Column() {
+function Column({ column }) {
+  const orderedCards = mapOrder(column?.cards, column?.cardOrderIds, '_id')
   const [anchorEl, setAnchorEl] = React.useState(null)
   const open = Boolean(anchorEl)
   const handleClick = (event) => {
@@ -33,7 +35,7 @@ function Column() {
     <Box sx={{
       minWidth: '300px',
       maxWidth: '300px',
-      bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#485460' : 'white'),
+      bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#485460' : '#dfe6e9'),
       color: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#485460'),
       m: '0 8px',
       borderRadius: '12px',
@@ -55,7 +57,7 @@ function Column() {
           cursor: 'pointer'
         }}
         >
-          Column Title
+          {column?.title}
         </Typography>
 
         <Tooltip>
@@ -121,7 +123,7 @@ function Column() {
       </Box>
 
       {/* Column List Card (Column Cards) */}
-      <ListCards />
+      <ListCards cards= { orderedCards } />
 
       {/* Column Footer (Add a card) */}
       <Box sx={{
