@@ -70,21 +70,21 @@ function BoardBar({ board }) {
           </Button>
         </Tooltip>
         <Tooltip title='Change visibility' disableHoverListener='true'>
-          <Chip
+          <Button
             onClick={handleClick}
-            icon={<GroupIcon />}
-            label={capitalizeFirstLetter(board?.type)}
             sx={{
               bgcolor: 'transparent',
               color: '#485460',
               fontWeight: 'bold',
-              borderRadius: 1,
               '&:hover': {
                 bgcolor: '#808e9b',
-                color: '#485460'
+                color: '#485460',
+                borderRadius: 1
               }
             }}
-          />
+          >
+            <GroupIcon /> {capitalizeFirstLetter(board?.type)}
+          </Button>
           <Menu
             id="menu-droplist"
             anchorEl={anchorEl}
