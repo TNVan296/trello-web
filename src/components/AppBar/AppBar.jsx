@@ -116,7 +116,7 @@ function AppBar() {
               color: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#485460')
             },
             '& input': {
-              color: '#485460'
+              color: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#485460')
             },
             '& .MuiOutlinedInput-root': {
               '& fieldset': {

@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState } from 'react'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
@@ -19,9 +19,11 @@ import PermMediaIcon from '@mui/icons-material/PermMedia'
 import ListCards from './ListCards/ListCards'
 import { mapOrder } from '~/utils/sorts'
 
+import { useSortable } from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
+
 function Column({ column }) {
-  const orderedCards = mapOrder(column?.cards, column?.cardOrderIds, '_id')
-  const [anchorEl, setAnchorEl] = React.useState(null)
+  const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget)
@@ -30,18 +32,39 @@ function Column({ column }) {
     setAnchorEl(null)
   }
 
+  const orderedCards = mapOrder(column?.cards, column?.cardOrderIds, '_id')
+
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
+    id: column._id,
+    data: { ...column }
+  })
+
+  // lúc này khi kéo sẽ nảy ra 1 bug phát sinh
+  // nếu sử dụng CSS.Transform sẽ nảy sinh bug kiểu stretch (làm giãn Column ra hoặc thu nhỏ lại)
+  // cách fix là ta chuyển sang CSS.Translate thì sẽ sửa được
+  const dndKitColumnStyles = {
+    transform: CSS.Translate.toString(transform),
+    transition
+  }
+
   return (
-    // Column 1
-    <Box sx={{
-      minWidth: '300px',
-      maxWidth: '300px',
-      bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#485460' : '#dfe6e9'),
-      color: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#485460'),
-      m: '0 8px',
-      borderRadius: '12px',
-      height: 'fit-content',
-      maxHeight: (theme) => `calc(${theme.trello.boardContentHeight} - ${theme.spacing(4)})`
-    }}>
+    // Column
+    <Box
+      ref={setNodeRef}
+      style= {dndKitColumnStyles}
+      {...attributes}
+      {...listeners}
+      sx={{
+        minWidth: '300px',
+        maxWidth: '300px',
+        bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#485460' : '#dfe6e9'),
+        color: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#485460'),
+        m: '0 8px',
+        borderRadius: '12px',
+        height: 'fit-content',
+        maxHeight: (theme) => `calc(${theme.trello.boardContentHeight} - ${theme.spacing(4)})`
+      }}
+    >
 
       {/* Column Header (Column Title) */}
       <Box sx={{
