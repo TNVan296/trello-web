@@ -12,6 +12,9 @@ import AttachmentIcon from '@mui/icons-material/Attachment'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 
+import { useSortable } from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
+
 function TrelloCard({ card }) {
   const shouldShowCardActions = () => {
     return !!card?.description || !!card?.comments?.length || !!card?.attachments?.length
@@ -33,15 +36,31 @@ function TrelloCard({ card }) {
   //   )
   // }
   // // nếu false thì ngược lại
+
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+    id: card._id,
+    data: { ...card }
+  })
+
+  const dndKitCardStyles = {
+    transform: CSS.Translate.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : undefined
+  }
+
   return (
-    <Card sx={{
-      bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#2d3436': 'white'),
-      color: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#172b4d'),
-      borderRadius: 2,
-      boxShadow: '0 1px 1px rgba(0, 0, 0, 0.2)',
-      cursor: 'pointer',
-      overflow: 'unset'
-    }}>
+
+    <Card
+      ref={setNodeRef} style= {dndKitCardStyles} {...attributes} {...listeners}
+      sx={{
+        bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#2d3436': 'white'),
+        color: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#172b4d'),
+        borderRadius: 2,
+        boxShadow: '0 1px 1px rgba(0, 0, 0, 0.2)',
+        cursor: 'pointer',
+        overflow: 'unset'
+      }}
+    >
       {card?.cover &&
         <CardMedia sx={{ height: 140 }} image={card?.cover} title="Test" />
       }
