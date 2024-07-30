@@ -3,9 +3,17 @@ import BackgroundImg from '~/assets/milin-john-sea-unsplash.jpg'
 import ListColumns from './ListColumns/ListColumns'
 import { mapOrder } from '~/utils/sorts'
 
-import { DndContext, PointerSensor, TouchSensor, MouseSensor, useSensor, useSensors } from '@dnd-kit/core'
+import { DndContext, TouchSensor, MouseSensor, useSensor, useSensors, DragOverlay, defaultDropAnimationSideEffects } from '@dnd-kit/core'
 import { arrayMove } from '@dnd-kit/sortable'
 import { useState, useEffect } from 'react'
+
+import Column from './ListColumns/Column/Column'
+import Card from './ListColumns/Column/ListCards/Card/Card'
+
+const ACTIVE_DRAG_ITEM_TYPE = {
+  COLUMN: 'ACTIVE_DRAG_ITEM_TYPE_COLUMN',
+  CARD: 'ACTIVE_DRAG_ITEM_TYPE_CARD'
+}
 
 function BoardContent({ board }) {
   // lý do comment lại dòng này vì còn bug =))
@@ -15,7 +23,7 @@ function BoardContent({ board }) {
   const mouseSensor = useSensor(MouseSensor, { activationConstraint: { distance: 10 } })
 
   // yêu cầu nhấn giữ màn hình 250ms và dung sai của cảm ứng (dễ hiểu là di chuyển/chêch lệch 5px) là sẽ kích hoạt event
-  const touchSensor = useSensor(TouchSensor, { activationConstraint: { delay: 250, tolerance: 5 } })
+  const touchSensor = useSensor(TouchSensor, { activationConstraint: { delay: 250, tolerance: 500 } })
 
   // const mySensors = useSensors(pointerSensor)
   // ưu tiên sử dụng kết hợp 2 loại sensors là mouse và touch để có trải nghiệm tốt trên cả 2 nền tảng mobile và pc (laptop), để ko bị bug =)))
@@ -23,12 +31,29 @@ function BoardContent({ board }) {
 
   const [orderedColumns, setOrderedColumns] = useState([])
 
+  // cùng 1 thời điểm chỉ có 1 column (hoặc card) được kéo đi
+  const [activeDragItemId, setActiveDragItemId] = useState([null])
+  const [activeDragItemType, setActiveDragItemType] = useState([null])
+  const [activeDragItemData, setActiveDragItemData] = useState([null])
+
   // mỗi khi dữ liệu board thay đổi sẽ gọi lại useEffect
   useEffect(() => {
     const orderedColumns = mapOrder(board?.columns, board?.columnOrderIds, '_id')
     setOrderedColumns(orderedColumns)
   }, [board])
 
+  // Trigger khi bắt đầu kéo 1 phần tử
+  const handleDragStart = (event) => {
+    console.log('handleDragStart: ', event)
+    // đặt trạng thái active của id
+    setActiveDragItemId(event?.active?.id)
+    // lấy ra kiểu dữ liệu mà ta đã kéo là gì. Nếu columnId tồn tại khi active sự kiện thì nghĩa là ta đang kéo card, nếu ko thì ngược lại
+    setActiveDragItemType(event?.active?.data?.current?.columnId ? ACTIVE_DRAG_ITEM_TYPE.CARD : ACTIVE_DRAG_ITEM_TYPE.COLUMN)
+    // lấy ra data mà ta kéo
+    setActiveDragItemData(event?.active?.data?.current)
+  }
+
+  // Trigger khi kết thúc hành động kéo 1 phần tử
   const handleDragEnd = (event) => {
     console.log('handleDragEnd: ', event)
     const { active, over } = event
@@ -55,10 +80,21 @@ function BoardContent({ board }) {
       // cập nhật lại state của columns ban đầu sau khi kéo thả
       setOrderedColumns(dndOrderedColumns)
     }
+
+    setActiveDragItemId(null)
+    setActiveDragItemType(null)
+    setActiveDragItemData(null)
+  }
+
+  // animation khi drop 1 phần tử
+  const customDropAnimation = {
+    sideEffects: defaultDropAnimationSideEffects({
+      styles: { active: { opacity: '0.5' } }
+    })
   }
 
   return (
-    <DndContext onDragEnd={handleDragEnd} sensors={mySensors}>
+    <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd} sensors={mySensors}>
       <Box sx={{
         backgroundImage: `url(${BackgroundImg})`,
         backgroundSize: 'cover',
@@ -69,6 +105,14 @@ function BoardContent({ board }) {
       }}
       >
         <ListColumns columns={ orderedColumns }/>
+        <DragOverlay dropAnimation={ customDropAnimation }>
+          {/* nếu ta ko kéo hay làm gì cả thì nó null (chả có gì xảy ra) */}
+          {!activeDragItemType && null}
+          {/* nếu activeDragItemType = Column thì sẽ để lại 1 Column chứa data trong column đó là activeDragItemData với opacity = 0.5
+          tức là khi ta kéo Colum thì nó sẽ giữ chỗ Column đó nhưng mờ đi) */}
+          {(activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.COLUMN) && <Column column={activeDragItemData} />}
+          {(activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.CARD) && <Card card={activeDragItemData} />}
+        </DragOverlay>
       </Box>
     </DndContext>
   )
