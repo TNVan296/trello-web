@@ -45,7 +45,8 @@ function TrelloCard({ card }) {
   const dndKitCardStyles = {
     transform: CSS.Translate.toString(transform),
     transition,
-    opacity: isDragging ? 0.5 : undefined
+    opacity: isDragging ? 0.5 : undefined,
+    border: isDragging ? '2px solid #74b9ff' : undefined
   }
 
   return (
