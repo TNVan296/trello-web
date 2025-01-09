@@ -41,21 +41,24 @@ function BoardBar({ board }) {
       borderTop: '2px solid #7f8c8d'
     }}>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-        <Chip
-          sx={{
-            bgcolor: 'transparent',
-            color: '#34495e',
-            fontSize: '1rem',
-            fontWeight: 'bold',
-            border: 'none',
-            borderRadius: 4,
-            padding: '5px',
-            '&:hover': {
-              bgcolor: '#808e9b'
-            }
-          }}
-          label={board?.title}
-          clickable />
+        <Tooltip title={board?.description}>
+          <Chip
+            sx={{
+              bgcolor: 'transparent',
+              color: '#34495e',
+              fontSize: '1rem',
+              fontWeight: 'bold',
+              border: 'none',
+              borderRadius: 4,
+              padding: '5px',
+              '&:hover': {
+                bgcolor: '#808e9b'
+              }
+            }}
+            label={board?.title}
+            clickable
+          />
+        </Tooltip>
         <Tooltip title='Click to star or unstar this board'>
           <Button
             sx={{
@@ -94,8 +97,8 @@ function BoardBar({ board }) {
               'aria-labelledby': 'button-menu-droplist'
             }}>
             <MenuItem onClick={handleClose}>Private</MenuItem>
-            <MenuItem onClick={handleClose}>Workspace</MenuItem>
-            <MenuItem onClick={handleClose}>Organization</MenuItem>
+            {/* <MenuItem onClick={handleClose}>Workspace</MenuItem>
+            <MenuItem onClick={handleClose}>Organization</MenuItem> */}
             <MenuItem onClick={handleClose}>Public</MenuItem>
           </Menu>
         </Tooltip>
