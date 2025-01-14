@@ -59,7 +59,9 @@ function TrelloCard({ card }) {
         borderRadius: 2,
         boxShadow: '0 1px 1px rgba(0, 0, 0, 0.2)',
         cursor: 'pointer',
-        overflow: 'unset'
+        overflow: 'unset',
+        border: '1px solid transparent',
+        '&:hover': { borderColor: '#2e86de' }
       }}
     >
       {card?.cover &&

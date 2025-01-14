@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Box from '@mui/material/Box'
 import AppsIcon from '@mui/icons-material/Apps'
 import ModeSelect from '~/components/ModeSelect/ModeSelect'
@@ -18,6 +19,7 @@ import HelpOutlineIcon from '@mui/icons-material/HelpOutline'
 import InputAdornment from '@mui/material/InputAdornment'
 
 function AppBar() {
+  const [searchValue, setSearchValue] = useState('')
   return (
     <Box px={1.5} sx={{
       width: '100%',
@@ -39,7 +41,7 @@ function AppBar() {
           sx={{
             color: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#485460'),
             '&:hover': {
-              bgcolor: '#808e9b',
+              bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#808e9b' : '#a5b1c2'),
               borderRadius: 1.5
             }
           }} />
@@ -49,7 +51,7 @@ function AppBar() {
             alignItems: 'center',
             gap: 0.5,
             '&:hover': {
-              bgcolor: '#808e9b',
+              bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#808e9b' : '#a5b1c2'),
               borderRadius: 1.5
             }
           }}>
@@ -94,7 +96,6 @@ function AppBar() {
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
         <ModeSelect />
         <TextField
-          id="outlined-search"
           label="Search"
           InputProps={{
             startAdornment: (
@@ -105,6 +106,8 @@ function AppBar() {
           }}
           type="text"
           size='small'
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
           sx={{
             minWidth: '120px',
             maxWidth: '200px',
@@ -134,10 +137,12 @@ function AppBar() {
         <Tooltip title='Notifications'>
           <Button
             sx={{
+              minWidth: '30px',
+              maxWidth: '30px',
               color: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#485460'),
               '&:hover': {
-                bgcolor: '#808e9b',
                 color: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#485460'),
+                bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#808e9b' : '#a5b1c2'),
                 borderRadius: 1.5
               }
             }}>
@@ -148,10 +153,12 @@ function AppBar() {
         <Tooltip title='Help'>
           <Button
             sx={{
+              minWidth: '30px',
+              maxWidth: '30px',
               color: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#485460'),
               '&:hover': {
                 color: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#485460'),
-                bgcolor: '#808e9b',
+                bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#808e9b' : '#a5b1c2'),
                 borderRadius: 1.5
               }
             }}>
