@@ -29,8 +29,8 @@ function Templates() {
           sx={{
             color: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#485460'),
             '&:hover': {
-              bgcolor: '#808e9b',
               color: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#485460'),
+              bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#808e9b' : '#a5b1c2'),
               borderRadius: 1.5
             }
           }}

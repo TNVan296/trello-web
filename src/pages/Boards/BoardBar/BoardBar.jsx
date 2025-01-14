@@ -36,11 +36,11 @@ function BoardBar({ board }) {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
-      gap: 1.5,
+      gap: 1,
       overflowX: 'auto',
       borderTop: '2px solid #7f8c8d'
     }}>
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
         <Tooltip title={board?.description}>
           <Chip
             sx={{
@@ -50,9 +50,10 @@ function BoardBar({ board }) {
               fontWeight: 'bold',
               border: 'none',
               borderRadius: 4,
-              padding: '5px',
+              padding: '2px',
               '&:hover': {
-                bgcolor: '#808e9b'
+                color: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#485460'),
+                bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#808e9b' : '#a5b1c2'),
               }
             }}
             label={board?.title}
@@ -62,10 +63,12 @@ function BoardBar({ board }) {
         <Tooltip title='Click to star or unstar this board'>
           <Button
             sx={{
+              minWidth: '40px',
+              maxWidth: '40px',
               color: '#485460',
               '&:hover': {
-                bgcolor: '#808e9b',
-                color: '#485460',
+                color: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#485460'),
+                bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#808e9b' : '#a5b1c2'),
                 borderRadius: 1
               }
             }}>
@@ -77,11 +80,12 @@ function BoardBar({ board }) {
             onClick={handleClick}
             sx={{
               bgcolor: 'transparent',
+              gap: 0.5,
               color: '#485460',
               fontWeight: 'bold',
               '&:hover': {
-                bgcolor: '#808e9b',
-                color: '#485460',
+                color: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#485460'),
+                bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#808e9b' : '#a5b1c2'),
                 borderRadius: 1
               }
             }}
@@ -107,6 +111,7 @@ function BoardBar({ board }) {
             sx={{
               color: '#d2dae2',
               bgcolor: '#808e9b',
+              gap: 0.5,
               '&:hover': {
                 bgcolor: '#808e9b',
                 color: '#d2dae2',
@@ -117,20 +122,22 @@ function BoardBar({ board }) {
           </Button>
         </Tooltip>
       </Box>
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
         <Box
           sx={{
             display: 'flex',
             alignItems: 'center',
-            gap: 1.5
+            gap: 0.5
           }}>
           <Tooltip title='Automation'>
             <Button
               sx={{
+                minWidth: '40px',
+                maxWidth: '40px',
                 color: '#485460',
                 '&:hover': {
-                  bgcolor: '#808e9b',
-                  color: '#485460',
+                  color: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#485460'),
+                  bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#808e9b' : '#a5b1c2'),
                   borderRadius: 1
                 }
               }}>
@@ -142,8 +149,8 @@ function BoardBar({ board }) {
               sx={{
                 color: '#485460',
                 '&:hover': {
-                  bgcolor: '#808e9b',
-                  color: '#485460',
+                  color: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#485460'),
+                  bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#808e9b' : '#a5b1c2'),
                   borderRadius: 1
                 }
               }}>
@@ -156,7 +163,7 @@ function BoardBar({ board }) {
           sx={{
             display: 'flex',
             alignItems: 'center',
-            gap: 1.5
+            gap: 1
           }}
         >
           <AvatarGroup
@@ -169,6 +176,7 @@ function BoardBar({ board }) {
                 fontSize: 16,
                 border: 'none',
                 color: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#485460'),
+                gap: 0.5,
                 cursor: 'pointer',
                 '&:first-of-type': { bgcolor: 'a4b0de' }
               }
@@ -194,6 +202,7 @@ function BoardBar({ board }) {
             <Button
               sx={{
                 color: '#d2dae2',
+                gap: 0.5,
                 bgcolor: '#808e9b',
                 '&:hover': {
                   bgcolor: '#808e9b',

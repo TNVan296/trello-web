@@ -6,7 +6,7 @@ function ListCards({ cards }) {
   return (
     <SortableContext items={cards?.map(c => c._id)} strategy={verticalListSortingStrategy}>
       <Box sx={{
-        p: '0 5px',
+        p: '0 5px 5px 5px',
         m: '0 4px',
         display: 'flex',
         flexDirection: 'column',
@@ -18,7 +18,7 @@ function ListCards({ cards }) {
           ${theme.trello.boardContentHeight} -
           ${theme.spacing(4)} -
           ${theme.trello.columnHeaderHeight} -
-          ${theme.trello.columnHeaderHeight}
+          ${theme.trello.columnFooterHeight}
           )`,
         // custom scroll bar cho List Cards
         '&::-webkit-scrollbar-thumb': {
