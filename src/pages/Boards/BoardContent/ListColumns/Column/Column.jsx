@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { toast } from 'react-toastify'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
@@ -43,7 +44,10 @@ function Column({ column }) {
 
   const toggleOpenNewCardForm = () => setOpenNewCardForm(!openNewCardForm)
   const addNewCard = () => {
-    if (!newCardTitle) return
+    if (!newCardTitle) {
+      toast.error('Please enter Card title', { position: 'bottom-right', theme: 'colored'})
+      return
+    }
 
     // Gọi API ở đây
 
