@@ -6,17 +6,18 @@ import { mapOrder } from '~/utils/sorts'
 import { DndContext, TouchSensor, MouseSensor, useSensor, useSensors, DragOverlay, defaultDropAnimationSideEffects, closestCorners, pointerWithin, getFirstCollision } from '@dnd-kit/core'
 import { arrayMove } from '@dnd-kit/sortable'
 import { useState, useEffect, useCallback, useRef } from 'react'
-import { cloneDeep } from 'lodash'
+import { cloneDeep, isEmpty } from 'lodash'
 
 import Column from './ListColumns/Column/Column'
 import Card from './ListColumns/Column/ListCards/Card/Card'
+import { generatePlaceholderCard } from '~/utils/formatters'
 
 const ACTIVE_DRAG_ITEM_TYPE = {
   COLUMN: 'ACTIVE_DRAG_ITEM_TYPE_COLUMN',
   CARD: 'ACTIVE_DRAG_ITEM_TYPE_CARD'
 }
 
-function BoardContent({ board }) {
+function BoardContent({ board, createNewColumn, createNewCard }) {
   // lý do comment lại dòng này vì còn bug =))
   // const pointerSensor = useSensor(PointerSensor, { activationConstraint: { distance: 10 } })
 
@@ -93,6 +94,11 @@ function BoardContent({ board }) {
         // trong nextActiveColumns (tức là cho ra 1 mảng mới không chứa card ta đang kéo)
         nextActiveColumn.cards = nextActiveColumn.cards.filter(card => card._id !== activeDraggingCardId)
 
+        // Thêm Placeholder Card nếu Column rỗng: Bị kéo hết Card đi không còn cái nào
+        if (isEmpty(nextActiveColumn.cards)) {
+          nextActiveColumn.cards = [generatePlaceholderCard(nextActiveColumn)]
+        }
+
         // cập nhật lại mảng cardOrderIds cho chuẩn dữ liệu, cập nhật các card còn lại trong column
         nextActiveColumn.cardOrderIds = nextActiveColumn.cards.map(card => card._id)
       }
@@ -111,6 +117,9 @@ function BoardContent({ board }) {
         nextOverColumn.cards = nextOverColumn.cards.toSpliced(
           newCardIndex, 0, { ...activeDraggingCardData, columnId: nextOverColumn._id }
         )
+
+        // Xóa Placeholder Card đi nếu tồn tại
+        nextOverColumn.cards = nextOverColumn.cards.filter(card => !card.FE_PlaceholderCard)
 
         // cập nhật lại mảng cardOrderIds cho chuẩn dữ liệu, cập nhật các card còn lại trong column
         nextOverColumn.cardOrderIds = nextOverColumn.cards.map(card => card._id)
@@ -354,8 +363,12 @@ function BoardContent({ board }) {
         p: '10px 5px'
       }}
       >
-        <ListColumns columns={ orderedColumns }/>
-        <DragOverlay dropAnimation={ customDropAnimation }>
+        <ListColumns
+          columns={orderedColumns}
+          createNewColumn={createNewColumn}
+          createNewCard={createNewCard}
+        />
+        <DragOverlay dropAnimation={customDropAnimation}>
           {/* nếu ta ko kéo hay làm gì cả thì nó null (chả có gì xảy ra) */}
           {!activeDragItemType && null}
           {/* nếu activeDragItemType = Column thì sẽ để lại 1 Column chứa data trong column đó là activeDragItemData với opacity = 0.5
