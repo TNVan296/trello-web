@@ -1,9 +1,3 @@
-/**
- * Đây là file mẫu từ kênh TrungQuanDev
- * YouTube: TrungQuanDev - Một Lập Trình Viên
- * Created by trungquandev.com's author on Jun 28, 2023
- * Copy by ThuongNVa on July 15, 2024
- */
 export const mockData = {
   board: {
     _id: 'board-id-01',

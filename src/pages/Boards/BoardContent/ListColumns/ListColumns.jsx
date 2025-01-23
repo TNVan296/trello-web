@@ -9,18 +9,28 @@ import CloseIcon from '@mui/icons-material/Close'
 
 import { SortableContext, horizontalListSortingStrategy } from '@dnd-kit/sortable'
 
-function ListColumns({ columns }) {
+function ListColumns({ columns, createNewColumn, createNewCard }) {
   const [openNewColumnForm, setOpenNewColumnForm] = useState(false)
   const [newColumnTitle, setNewColumnTitle] = useState('')
 
   const toggleOpenNewColumnForm = () => setOpenNewColumnForm(!openNewColumnForm)
-  const addNewColumn = () => {
+  const addNewColumn = async () => {
     if (!newColumnTitle) {
       toast.error('Please enter column title')
       return
     }
 
-    // Gọi API ở đây
+    // Tạo dữ liệu Column để gọi API
+    const newColumnData = {
+      title: newColumnTitle
+    }
+
+    /**
+     * Gọi lên props function createNewColumn nằm ở component cha cao nhất (boards/_id.jsx)
+     * Lưu ý: Đối với các dự án có cấp component quá sâu thì việc nên dùng Redux khá tiện ích hoặc các zustand =))
+     * Với việc sử dụng Redux như vậy thì code sẽ Clean chuẩn chỉnh hơn rất nhiều.
+     */
+    await createNewColumn(newColumnData)
 
     // Đóng trạng thái thêm Column mới và Clear Value đã nhập
     toggleOpenNewColumnForm()
@@ -43,7 +53,7 @@ function ListColumns({ columns }) {
       }}>
         {/* map dữ liệu trong columns, với mỗi column sẽ trả về 1 component
         Column chứa props gồm key là _id (trong mock-data) và column chứa column (trong mock-data)  */}
-        {columns?.map(column => <Column key={column._id} column={column} />)}
+        {columns?.map(column => <Column key={column._id} column={column} createNewCard={createNewCard} />)}
 
         {/* Button Add new Column */}
         {!openNewColumnForm ?

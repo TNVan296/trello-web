@@ -60,6 +60,7 @@ function TrelloCard({ card }) {
         boxShadow: '0 1px 1px rgba(0, 0, 0, 0.2)',
         cursor: 'pointer',
         overflow: 'unset',
+        display: card?.FE_PlaceholderCard ? 'none' : 'block',
         border: '1px solid transparent',
         '&:hover': { borderColor: '#2e86de' }
       }}
