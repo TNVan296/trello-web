@@ -3,7 +3,20 @@ import BackgroundImg from '~/assets/milin-john-sea-unsplash.jpg'
 import ListColumns from './ListColumns/ListColumns'
 import { mapOrder } from '~/utils/sorts'
 
-import { DndContext, TouchSensor, MouseSensor, useSensor, useSensors, DragOverlay, defaultDropAnimationSideEffects, closestCorners, pointerWithin, getFirstCollision } from '@dnd-kit/core'
+import {
+  DndContext,
+  // PointerSensor,
+  // MouseSensor,
+  // TouchSensor,
+  useSensor,
+  useSensors,
+  DragOverlay,
+  defaultDropAnimationSideEffects,
+  closestCorners,
+  pointerWithin,
+  getFirstCollision
+} from '@dnd-kit/core'
+import { MouseSensor, TouchSensor } from '~/customLibs/DndKitSensors'
 import { arrayMove } from '@dnd-kit/sortable'
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { cloneDeep, isEmpty } from 'lodash'
@@ -58,7 +71,7 @@ function BoardContent({ board, createNewColumn, createNewCard }) {
     return orderedColumns.find(column => column.cards.map(card => card._id)?.includes(cardId))
   }
 
-  // function xử lý logic và cập nhật lại state khi thao tác kéo thả trong cùng 1 column và giữa 2 column khác nhau
+  // function xử lý logic và cập nhật lại state khi thao tác kéo thả trong cùng 1 column và giữa 2 column khác nhau (khá khó hiểu)
   const moveCardBetweenDifferentColumn = (
     overColumn,
     overCardId,

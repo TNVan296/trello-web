@@ -204,6 +204,7 @@ function Column({ column, createNewCard }) {
               <Button
                 onClick={toggleOpenNewCardForm}
                 startIcon={<AddIcon />}
+                data-no-dnd='true'
                 sx={{
                   minWidth: '240px',
                   maxWidth: '250px',
@@ -219,10 +220,10 @@ function Column({ column, createNewCard }) {
               >
                 Add a card
               </Button>
-              <Tooltip
+              <Button
                 title='Create template card'
-              >
-                <PermMediaIcon sx={{
+                data-no-dnd='true'
+                sx={{
                   minWidth: '40px',
                   maxWidth: '40px',
                   cursor: 'pointer',
@@ -233,8 +234,9 @@ function Column({ column, createNewCard }) {
                     borderRadius: 1.5
                   }
                 }}
-                />
-              </Tooltip>
+              >
+                <PermMediaIcon />
+              </Button>
             </Box>
             :
             <Box
@@ -254,6 +256,7 @@ function Column({ column, createNewCard }) {
                 type="text"
                 size='small'
                 autoFocus
+                data-no-dnd='true'
                 variant='outlined'
                 value={newCardTitle}
                 onChange={(e) => setNewCardTitle(e.target.value)}
@@ -291,6 +294,7 @@ function Column({ column, createNewCard }) {
                 }}>
                 <Button
                   onClick={addNewCard}
+                  data-no-dnd='true'
                   variant='contained'
                   size='small'
                   sx={{
@@ -310,6 +314,7 @@ function Column({ column, createNewCard }) {
                 </Button>
                 <Button
                   onClick={toggleOpenNewCardForm}
+                  data-no-dnd='true'
                   sx={{
                     minWidth: '40px',
                     maxWidth: '40px',
