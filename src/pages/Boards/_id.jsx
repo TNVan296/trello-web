@@ -5,7 +5,7 @@ import Container from '@mui/material/Container'
 import AppBar from '~/components/AppBar/AppBar'
 import BoardBar from './BoardBar/BoardBar'
 import BoardContent from './BoardContent/BoardContent'
-import { fetchBoardDetailsAPI, createNewColumnAPI, createNewCardAPI } from '~/apis/index'
+import { fetchBoardDetailsAPI, updateBoardDetailsAPI, createNewColumnAPI, createNewCardAPI } from '~/apis/index'
 import { generatePlaceholderCard } from '~/utils/formatters'
 
 function Board() {
@@ -63,6 +63,19 @@ function Board() {
     setBoard(newBoard)
   }
 
+  // Func có nhiệm vụ gọi API và xử lý khi kéo thả Column xong xuôi
+  const moveColumns = async (dndOrderedColumns) => {
+    // Update lại chuẩn dữ liệu state board
+    const dndOrderedColumnsId = dndOrderedColumns.map(c => c._id)
+    const newBoard = { ...board }
+    newBoard.columns = dndOrderedColumns
+    newBoard.columnOrderIds = dndOrderedColumnsId
+    setBoard(newBoard)
+
+    // Gọi API
+    await updateBoardDetailsAPI(newBoard._id, { columnOrderIds: dndOrderedColumnsId })
+  }
+
   return (
     <Container disableGutters maxWidth={false} sx={{ height: '100vh' }}>
       <AppBar />
@@ -71,6 +84,7 @@ function Board() {
         board={board}
         createNewColumn={createNewColumn}
         createNewCard={createNewCard}
+        moveColumns={moveColumns}
       />
     </Container>
   )
