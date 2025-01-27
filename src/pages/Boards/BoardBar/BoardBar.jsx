@@ -44,16 +44,16 @@ function BoardBar({ board }) {
         <Tooltip title={board?.description}>
           <Chip
             sx={{
-              bgcolor: 'transparent',
-              color: '#34495e',
               fontSize: '1rem',
               fontWeight: 'bold',
               border: 'none',
               borderRadius: 4,
               padding: '2px',
+              bgcolor: 'transparent',
+              color: '#34495e',
               '&:hover': {
                 color: (theme) => (theme.palette.mode === 'dark' ? '#d2dae2' : '#485460'),
-                bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#808e9b' : '#a5b1c2'),
+                bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#808e9b' : '#a5b1c2')
               }
             }}
             label={board?.title}

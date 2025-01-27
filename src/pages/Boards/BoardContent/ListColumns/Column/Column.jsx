@@ -20,7 +20,6 @@ import AddIcon from '@mui/icons-material/Add'
 import CloseIcon from '@mui/icons-material/Close'
 import PermMediaIcon from '@mui/icons-material/PermMedia'
 import ListCards from './ListCards/ListCards'
-import { mapOrder } from '~/utils/sorts'
 
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
@@ -37,13 +36,13 @@ function Column({ column, createNewCard }) {
     setAnchorEl(null)
   }
 
-  const orderedCards = mapOrder(column?.cards, column?.cardOrderIds, '_id')
+  const orderedCards = column.cards
 
   const [openNewCardForm, setOpenNewCardForm] = useState(false)
   const [newCardTitle, setNewCardTitle] = useState('')
 
   const toggleOpenNewCardForm = () => setOpenNewCardForm(!openNewCardForm)
-  const addNewCard = async () => {
+  const addNewCard = () => {
     if (!newCardTitle) {
       toast.error('Please enter Card title', { position: 'bottom-right', theme: 'colored'})
       return
@@ -60,7 +59,7 @@ function Column({ column, createNewCard }) {
      * Lưu ý: Đối với các dự án có cấp component quá sâu thì việc nên dùng Redux khá tiện ích hoặc các zustand =))
      * Với việc sử dụng Redux như vậy thì code sẽ Clean chuẩn chỉnh hơn rất nhiều.
      */
-    await createNewCard(newCardData)
+    createNewCard(newCardData)
 
     // Đóng trạng thái thêm Card mới và Clear Value đã nhập
     toggleOpenNewCardForm()
