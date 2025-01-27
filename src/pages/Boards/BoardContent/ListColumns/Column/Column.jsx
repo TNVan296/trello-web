@@ -20,7 +20,6 @@ import AddIcon from '@mui/icons-material/Add'
 import CloseIcon from '@mui/icons-material/Close'
 import PermMediaIcon from '@mui/icons-material/PermMedia'
 import ListCards from './ListCards/ListCards'
-
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 
@@ -44,7 +43,7 @@ function Column({ column, createNewCard }) {
   const toggleOpenNewCardForm = () => setOpenNewCardForm(!openNewCardForm)
   const addNewCard = () => {
     if (!newCardTitle) {
-      toast.error('Please enter Card title', { position: 'bottom-right', theme: 'colored'})
+      toast.error('Please enter Card title', { position: 'bottom-right', theme: 'colored' })
       return
     }
 
