@@ -148,9 +148,18 @@ function Column({ column, createNewCard }) {
               'aria-labelledby': 'basic-column-dropdown'
             }}
           >
-            <MenuItem>
+            <MenuItem
+              sx={{
+                '&:hover': {
+                  color: '#2ecc71',
+                  '& .success-icon': {
+                    color: '#2ecc71'
+                  }
+                }
+              }}
+            >
               <ListItemIcon>
-                <AddCardIcon fontSize='small' />
+                <AddCardIcon className='success-icon' fontSize='small' />
               </ListItemIcon>
               <ListItemText>Add card</ListItemText>
             </MenuItem>
@@ -167,9 +176,18 @@ function Column({ column, createNewCard }) {
               <ListItemText>Move card</ListItemText>
             </MenuItem>
             <Divider />
-            <MenuItem>
+            <MenuItem
+              sx={{
+                '&:hover': {
+                  color: '#e74c3c',
+                  '& .delete-icon': {
+                    color: '#e74c3c'
+                  }
+                }
+              }}
+            >
               <ListItemIcon>
-                <DeleteIcon fontSize='small'/>
+                <DeleteIcon className='delete-icon' fontSize='small'/>
               </ListItemIcon>
               <ListItemText>Delete column</ListItemText>
             </MenuItem>
