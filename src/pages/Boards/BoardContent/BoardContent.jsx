@@ -29,7 +29,7 @@ const ACTIVE_DRAG_ITEM_TYPE = {
   CARD: 'ACTIVE_DRAG_ITEM_TYPE_CARD'
 }
 
-function BoardContent({ board, createNewColumn, createNewCard, moveColumns, moveCardInTheSameColumn, moveCardToDifferentColumn }) {
+function BoardContent({ board, createNewColumn, createNewCard, moveColumns, moveCardInTheSameColumn, moveCardToDifferentColumn, deleteColumnDetails }) {
   // lý do comment lại dòng này vì còn bug =))
   // const pointerSensor = useSensor(PointerSensor, { activationConstraint: { distance: 10 } })
 
@@ -390,6 +390,7 @@ function BoardContent({ board, createNewColumn, createNewCard, moveColumns, move
           columns={orderedColumns}
           createNewColumn={createNewColumn}
           createNewCard={createNewCard}
+          deleteColumnDetails={deleteColumnDetails}
         />
         <DragOverlay dropAnimation={customDropAnimation}>
           {/* nếu ta ko kéo hay làm gì cả thì nó null (chả có gì xảy ra) */}

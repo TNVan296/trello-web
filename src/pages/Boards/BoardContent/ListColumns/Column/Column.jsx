@@ -22,8 +22,9 @@ import PermMediaIcon from '@mui/icons-material/PermMedia'
 import ListCards from './ListCards/ListCards'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
+import { useConfirm } from 'material-ui-confirm'
 
-function Column({ column, createNewCard }) {
+function Column({ column, createNewCard, deleteColumnDetails }) {
   const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
 
@@ -41,6 +42,7 @@ function Column({ column, createNewCard }) {
   const [newCardTitle, setNewCardTitle] = useState('')
 
   const toggleOpenNewCardForm = () => setOpenNewCardForm(!openNewCardForm)
+
   const addNewCard = () => {
     if (!newCardTitle) {
       toast.error('Please enter Card title', { position: 'bottom-right', theme: 'colored' })
@@ -63,6 +65,21 @@ function Column({ column, createNewCard }) {
     // Đóng trạng thái thêm Card mới và Clear Value đã nhập
     toggleOpenNewCardForm()
     setNewCardTitle('')
+  }
+
+  // xử lý xóa 1 column
+  const confirmDeleteColumn = useConfirm()
+  const handleDeleteColumn = () => {
+    confirmDeleteColumn({
+      title: 'Delete Column ?',
+      description: 'This action will pernamently delete your Column and its Cards ! Are you sure ?',
+      confirmationText: 'Confirm',
+      cancellationText: 'Cancel'
+    }).then(() => {
+      deleteColumnDetails(column._id)
+    }).catch(() => {
+      console.log('Đéo có gì !')
+    })
   }
 
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
@@ -144,11 +161,13 @@ function Column({ column, createNewCard }) {
             anchorEl={anchorEl}
             open={open}
             onClose={handleClose}
+            onClick={handleClose}
             MenuListProps={{
               'aria-labelledby': 'basic-column-dropdown'
             }}
           >
             <MenuItem
+              onClick={toggleOpenNewCardForm}
               sx={{
                 '&:hover': {
                   color: '#2ecc71',
@@ -177,6 +196,7 @@ function Column({ column, createNewCard }) {
             </MenuItem>
             <Divider />
             <MenuItem
+              onClick={handleDeleteColumn}
               sx={{
                 '&:hover': {
                   color: '#e74c3c',
