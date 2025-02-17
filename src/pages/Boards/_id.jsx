@@ -8,7 +8,15 @@ import CircularProgress from '@mui/material/CircularProgress'
 import AppBar from '~/components/AppBar/AppBar'
 import BoardBar from './BoardBar/BoardBar'
 import BoardContent from './BoardContent/BoardContent'
-import { fetchBoardDetailsAPI, updateBoardDetailsAPI, createNewColumnAPI, createNewCardAPI, updateColumnDetailsAPI, moveCardToDifferentColumnAPI } from '~/apis/index'
+import {
+  fetchBoardDetailsAPI,
+  updateBoardDetailsAPI,
+  createNewColumnAPI,
+  createNewCardAPI,
+  updateColumnDetailsAPI,
+  moveCardToDifferentColumnAPI,
+  deleteColumnDetailsAPI
+} from '~/apis/index'
 import { generatePlaceholderCard } from '~/utils/formatters'
 import { mapOrder } from '~/utils/sorts'
 import { Typography } from '@mui/material'
@@ -143,6 +151,17 @@ function Board() {
     })
   }
 
+  // xử lý xóa 1 Column và Cards bên trong nó
+  const deleteColumnDetails = (columnId) => {
+    // Update dữ liệu state board
+
+    // Gọi API xử lý phía BE
+    deleteColumnDetailsAPI(columnId).then(res => {
+      console.log('res: ', res)
+    })
+
+  }
+
   if (!board) {
     return (
       <Box sx={{
@@ -171,11 +190,13 @@ function Board() {
       <BoardBar board={board}/>
       <BoardContent
         board={board}
+
         createNewColumn={createNewColumn}
         createNewCard={createNewCard}
         moveColumns={moveColumns}
         moveCardInTheSameColumn={moveCardInTheSameColumn}
         moveCardToDifferentColumn={moveCardToDifferentColumn}
+        deleteColumnDetails={deleteColumnDetails}
       />
     </Container>
   )
