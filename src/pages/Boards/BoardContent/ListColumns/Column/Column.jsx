@@ -78,7 +78,7 @@ function Column({ column, createNewCard, deleteColumnDetails }) {
     }).then(() => {
       deleteColumnDetails(column._id)
     }).catch(() => {
-      console.log('Đéo có gì !')
+      console.log('Nahhh !')
     })
   }
 

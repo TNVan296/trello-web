@@ -20,6 +20,7 @@ import {
 import { generatePlaceholderCard } from '~/utils/formatters'
 import { mapOrder } from '~/utils/sorts'
 import { Typography } from '@mui/material'
+import { toast } from 'react-toastify'
 
 function Board() {
   const [board, setBoard] = useState(null)
@@ -154,10 +155,14 @@ function Board() {
   // xử lý xóa 1 Column và Cards bên trong nó
   const deleteColumnDetails = (columnId) => {
     // Update dữ liệu state board
+    const newBoard = { ...board }
+    newBoard.columns = newBoard.columns.filter(c => c._id !== columnId)
+    newBoard.columnOrderIds = newBoard.columnOrderIds.filter(_id => _id !== columnId)
+    setBoard(newBoard)
 
     // Gọi API xử lý phía BE
     deleteColumnDetailsAPI(columnId).then(res => {
-      console.log('res: ', res)
+      toast.success(res?.deleteResult)
     })
 
   }
